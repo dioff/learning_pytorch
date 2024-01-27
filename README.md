@@ -15,3 +15,4 @@ conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvi
 ## 三、更新情况
 
 2024.1.27 创建仓库并更新tensor操作并增加手写数字识别程序
+2024.1.28 建立分支save更新保存模型功能
