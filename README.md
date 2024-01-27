@@ -1,8 +1,17 @@
-## 本仓库为Niubility战队寒假视觉培训资料
+## 一、Niubility战队寒假视觉培训资料
 
-所需要自行安装pytorch（Anaconda中）
+> 本仓库基于Pytorch完成一些基础项目，不定期进行维护
 
-根据电脑有无GPU安装相应的版本
+## 二、安装依赖
 
 [Pytorch官网地址](https://pytorch.org/)
 
+推荐使用Anaconda安装避免安装CUDA，若安装失败请自行查找安装方式
+
+```bash
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+```
+
+## 三、更新情况
+
+2024.1.27 创建仓库并更新tensor操作并增加手写数字识别程序
