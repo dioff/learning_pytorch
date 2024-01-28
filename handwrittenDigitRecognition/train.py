@@ -11,7 +11,7 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from model.LeNet import LeNet5
 from tqdm import tqdm
-import sys
+import matplotlib.pyplot as plt
 
 # 定义超参数
 BATCH_SIZE = 64
@@ -59,6 +59,7 @@ model = LeNet5().to(DEVICE)
 # 定义优化器和损失函数
 loss_func = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(params=model.parameters())
+costs = []
 
 # 定义训练方法
 def train(dataloder, model, loss_func, optimizer, epoch):
@@ -71,7 +72,7 @@ def train(dataloder, model, loss_func, optimizer, epoch):
         loss = loss_func(output, target)
         loss.backward()
         optimizer.step()
-
+        costs.append(loss)
     loss, current = loss.item(), batch_size*len(data)
     print(f'EPOCHS:{epoch + 1}\tloss:{loss:>7f}', end='\t\n')
 
@@ -98,5 +99,18 @@ if __name__ == "__main__":
         test(test_dataloder, model, loss_func)
 
     # 保存模型
-    torch.save(model.state_dict(), "handwrittenDigitRecognition\LeNetModel.pth")
+    torch.save(model.state_dict(), r"handwrittenDigitRecognition\result\LeNetModel_1.pth")
     print("Saved model.")
+
+    # 绘制图片:此时的costs里面的数据是tensor类型,如果是gpu上跑的就是cuda,需要将他转换成array
+    if torch.cuda.is_available():
+        costs = [cost.cpu().detach().numpy() for cost in costs]
+    else:
+        costs = [cost.numpy() for cost in costs]
+    # print(costs)
+    plt.plot(costs)
+    plt.xlabel("number of iteration")
+    plt.ylabel("loss")
+    plt.title("LeNet5")
+    plt.savefig(r"handwrittenDigitRecognition\result\loss.jpg")
+    plt.show()
