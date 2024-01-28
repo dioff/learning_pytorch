@@ -13,7 +13,7 @@ class Reshape(nn.Module):
 		return x.view(-1, 1, 28, 28)
 
 
-class LeNet5(nn.Module):
+class LeNet5(nn.Module): 
 	def __init__(self):
 		super(LeNet5, self).__init__()
 		self.net = nn.Sequential(
@@ -62,3 +62,5 @@ if __name__ == '__main__':
 		print(layer.__class__.__name__, '\toutput shape: \t', X.shape)
 	X = torch.rand(size=(1, 1, 28, 28), dtype=torch.float32)
 	print(model(X))
+
+

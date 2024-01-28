@@ -58,7 +58,7 @@ test_dataloder = DataLoader(
 model = LeNet5().to(DEVICE)
 # 定义优化器和损失函数
 loss_func = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(params=model.parameters())
+optimizer = torch.optim.Adam(params=model.parameters(), lr=0.001)
 costs = []
 
 # 定义训练方法
