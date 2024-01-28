@@ -10,6 +10,8 @@ from torch import nn
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from model.LeNet import LeNet5
+from tqdm import tqdm
+import sys
 
 # 定义超参数
 BATCH_SIZE = 64
@@ -61,7 +63,7 @@ optimizer = torch.optim.Adam(params=model.parameters())
 # 定义训练方法
 def train(dataloder, model, loss_func, optimizer, epoch):
     model.train()
-    for batch_size, (data, target) in enumerate(dataloder):
+    for batch_size, (data, target) in enumerate(tqdm(dataloder, "Train")):
         data, target = data.to(DEVICE), target.to(DEVICE)
 
         optimizer.zero_grad()
@@ -71,7 +73,7 @@ def train(dataloder, model, loss_func, optimizer, epoch):
         optimizer.step()
 
     loss, current = loss.item(), batch_size*len(data)
-    print(f'EPOCHS:{epoch + 1}\tloss:{loss:>7f}', end='\t')
+    print(f'EPOCHS:{epoch + 1}\tloss:{loss:>7f}', end='\t\n')
 
 # 定义测试方法
 def test(dataloder, model, loss_func):
@@ -80,7 +82,7 @@ def test(dataloder, model, loss_func):
     size = len(dataloder.dataset)
     num_batches = len(dataloder)
     with torch.no_grad():
-        for data, target in dataloder:
+        for data, target in tqdm(dataloder, "Test"):
             data, target = data.to(DEVICE), target.to(DEVICE)
             pred = model(data)
             test_loss += loss_func(pred, target).item()
