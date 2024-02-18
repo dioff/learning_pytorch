@@ -24,3 +24,4 @@ conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvi
 - 2024.1.28 15：46 增加LeNet网络，建立train和test模板，利用LeNet网络训练MNIST数据集正确率99.1%
 - 2024.1.28 17：43 新增tqdm功能，实现训练过程中可视化
 - 2024.1.28 18：12 新增matplotlib绘制loss曲线图
+- 2024.2.18 16：31 新增李沐动手学pytorch章节
